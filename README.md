@@ -1,49 +1,86 @@
-# Astro Starter Kit: Blog
 
+[中文版本说明](./README_CN.md)
+
+## 👏🏻 Introduction
+
+This is a minimalist, beautiful, responsive blogging program written in Astro.
+
+## Preview
+
+[https://yufengbiji.com](https://yufengbiji.com)  
+
+[https://astro.yufengbiji.com](https://astro.yufengbiji.com)
+
+### Home
+
+![首页](./public/preview/preview_index.png)
+
+### Dark mode
+
+![文章黑暗模式](./public/preview/preview_dark.png?)
+
+### Normal article
+
+![普通文章模式](./public/preview/preview_light.png)
+
+### Syntax highlighting
+
+![Syntax](./public/preview/preview_syntaxHighlighting.png)
+
+### Three display model of images
+
+![](./public/preview/preview_different_mode.png)
+
+The three display modes of images are: `wide`, `big`, `inline`.
+When you edit your markdown file, you can add `wide` or `big` or `inline` to the image alt, like this:
+
+```markdown
+![alt content|wide](a.png)
 ```
-npm create astro@latest -- --template blog
-```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-
-![blog](https://user-images.githubusercontent.com/4677417/186189140-4ef17aac-c3c9-4918-a8c2-ce86ba1bb394.png)
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+<strong>The Separator is `|`, and the default mode is `big`.</strong>
 
 ## 🚀 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
+In this Astro project, you'll see the following folders and files:
 
 ```
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+|-- README.md
+|-- astro.config.mjs
+|-- package.json
+|-- public
+|   |-- favicon.svg
+|   `-- static
+|-- src
+|   |-- components
+|   |   |-- BaseHead.astro // common <head> tags
+|   |   |-- Footer.astro
+|   |   |-- Header.astro
+|   |   `-- Navigation.astro
+|   |-- consts.js
+|   |-- env.d.ts
+|   |-- layouts
+|   |   |-- BaseLayout.astro
+|   |   |-- MarkdownPost.astro
+|   |   |-- MoreTile.astro
+|   |   `-- Tile.astro
+|   |-- pages
+|   |   |-- about.astro
+|   |   |-- archive.astro
+|   |   |-- index.astro
+|   |   |-- posts 
+|   |   |   |-- some markdown post.md // markdown post 
+|   |   |-- rss.xml.js // RSS feed
+|   |   `-- tags
+|   |       `-- [tag].astro // dynamic route of all posts with a given tag
+|   |-- styles
+|   |   `-- global.css // global styles
+|   `-- utils.js
 ```
 
 Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
 There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
 
 Any static assets, like images, can be placed in the `public/` directory.
 
@@ -62,8 +99,4 @@ All commands are run from the root of the project, from a terminal:
 
 ## 👀 Want to learn more?
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

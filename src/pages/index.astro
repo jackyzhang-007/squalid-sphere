@@ -1,50 +1,79 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Tile from "../layouts/Tile.astro";
+import MoreTile from "../layouts/MoreTile.astro";
+const allPosts = await Astro.glob("../pages/posts/*.md");
+allPosts.sort((a, b) => Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate));
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header title={SITE_TITLE} />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/pages/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<BaseLayout>
+  <section class="everydayfeed">
+    <div class="section-content">
+      <h2 class="section-head">最新文章</h2>
+      <ul role="list" class="section-tiles">
+        {
+          // tile-hero
+          allPosts.slice(0, 1).map((post) => {
+            return (
+              <Tile title={post.frontmatter.title} href={post.url} date={post.frontmatter.pubDate} tags={post.frontmatter.tags} cover={post.frontmatter.cover.url} level="1" />
+            );
+          })
+        }
+
+        {
+          // tile-2up
+          allPosts.slice(1, 5).map((post) => {
+            return (
+              <Tile title={post.frontmatter.title} href={post.url} date={post.frontmatter.pubDate} tags={post.frontmatter.tags} cover={post.frontmatter.cover.url} level="2" />
+            );
+          })
+        }
+
+        {
+          // tile-3up
+          allPosts.slice(5, 11).map((post) => {
+            return (
+              <Tile title={post.frontmatter.title} href={post.url} date={post.frontmatter.pubDate} tags={post.frontmatter.tags} cover={post.frontmatter.cover.url} level="3" />
+            );
+          })
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="more-from-newsroom">
+    <div class="section-content">
+      <h2 class="section-head">更多文章</h2>
+   
+
+      <ul role="list" class="section-tiles">
+
+        {
+          // tile-2up
+          allPosts.slice(0, 6).map((post) => {
+            return (
+              <MoreTile title={post.frontmatter.title} href={post.url} date={post.frontmatter.pubDate} tags={post.frontmatter.tags} cover={post.frontmatter.cover.square !== "" ? post.frontmatter.cover.square : post.frontmatter.cover.url} />
+            );
+          })
+        }
+      </ul>
+      <div class="view-archive-wrapper">
+        <a href="/archive" class="cta-primary-light" data-analytics-region="router" data-analytics-title="view archive">阅读历史文章</a>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      var script = document.createElement("script");
+      script.src = "/static/js/animation.js";
+      document.head.appendChild(script);
+
+      script.onload = function () {
+        console.log("lazyload.js loaded");
+        // when layout is loaded, load the images
+        initImage();
+      };
+    });
+  </script>
+</BaseLayout>
