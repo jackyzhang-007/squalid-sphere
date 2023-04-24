@@ -1,8 +1,8 @@
-export const SITE_TITLE = `Air Blog`;
-export const SITE_DESCRIPTION = 'Site Description';
-export const SITE_EMAIL = 'no.sql@qq.com'
-export const SITE_NAME = 'astro.yufengbiji.com';
-export const SITE_URL = "https://astro.yufengbiji.com";
+export const SITE_TITLE = `Zyl Blog`;
+export const SITE_DESCRIPTION = 'life and work record';
+export const SITE_EMAIL = 'zylforever1@gmail.com'
+export const SITE_NAME = 'zhangyanlei.xyz';
+export const SITE_URL = "https://zhangyanlei.xyz";
 export const SITE_LANG = "zh-CN";
 
 // Author, used only when author is not specified on the page, 
